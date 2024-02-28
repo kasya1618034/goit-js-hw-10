@@ -12,7 +12,7 @@ try {
   loader.classList.remove('hidden');
   fetchBreeds().then(data => renderSelect(data));
 } catch (error) {
-  console.log(`${error}`);
+  Notiflix.Notify.failure(`${error}`);
   handleFetchError();
 };
 
@@ -41,7 +41,7 @@ breedSelect.addEventListener('change', e => {
   fetchCatByBreed(e.target.value)
     .then(data => renderCat(data[0]), errorElem.classList.add('hidden'))
     .catch(error => {
-      console.log(`${error}`, handleFetchError());
+      Notiflix.Notify.failure(`${error}`, handleFetchError());
     });
 });
 
