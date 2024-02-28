@@ -1,3 +1,9 @@
+.container, .breed-select {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .hidden {
   display: none;
 }
@@ -85,4 +91,8 @@
   87% {
     box-shadow: .2em -.2em 0 0 currentcolor;
   }
+}
+
+.ss-main.breed-select {
+  width: 15%;
 }
