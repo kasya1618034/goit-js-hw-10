@@ -2,20 +2,17 @@ import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
 import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
 
-const errorElement = document.querySelector('.error');
-const catInfoElement = document.querySelector('.cat-info');
-const loaderElement = document.querySelector('.loader');
-
-const fetchBreedsBtn = document.querySelector('.btn');
+const error = document.querySelector('.error');
+const catInfo = document.querySelector('.cat-info');
+const loader = document.querySelector('.loader');
 const breedSelect = document.querySelector('.breed-select');
 
-fetchBreedsBtn.addEventListener('click', () => {
-  try {
-      fetchBreeds().then(data => renderSelect(data));
-  } catch (error) {
-    console.log(error);
-  }
-});
+try {
+  loader.classList.remove('hidden');
+  fetchBreeds().then(data => renderSelect(data));
+} catch (error) {
+  console.log(error);
+};
 
 function renderSelect(breeds) {
   const markup = breeds
@@ -24,4 +21,25 @@ function renderSelect(breeds) {
     })
     .join('');
   breedSelect.insertAdjacentHTML('beforeend', markup);
+  loader.classList.add('hidden');
+}
+
+breedSelect.addEventListener('change', e => {
+  loader.classList.remove('hidden');
+  fetchCatByBreed(e.target.value).then(data => renderCat(data[0]));
+});
+
+function renderCat(catData) {
+  const { url } = catData;
+  const { name, description, temperament } = catData.breeds[0];
+  catInfo.insertAdjacentHTML(
+    'beforeend',
+    `<div>
+      <h2>${name}</h2>
+      <img src="${url}" alt="${name}"/>
+      <p>${description}</p>
+      <p>${temperament}</p>
+    </div>`
+  );
+  loader.classList.add('hidden');
 }
