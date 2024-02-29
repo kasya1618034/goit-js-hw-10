@@ -12,8 +12,8 @@ try {
   loader.classList.remove('hidden');
   fetchBreeds().then(data => renderSelect(data));
 } catch (error) {
-  Notiflix.Notify.failure(`${error}`);
-  handleFetchError();
+    Notiflix.Notify.failure(`${error}`);
+    handleFetchError();
 };
 
 function handleFetchError() {
