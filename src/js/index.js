@@ -38,6 +38,7 @@ function renderSelect(breeds) {
 
 breedSelect.addEventListener('change', e => {
   loader.classList.remove('hidden');
+  catInfo.innerHTML = '';
   fetchCatByBreed(e.target.value)
     .then(data => renderCat(data[0]), errorElem.classList.add('hidden'))
     .catch(error => {
