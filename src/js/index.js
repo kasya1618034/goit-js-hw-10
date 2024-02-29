@@ -50,11 +50,15 @@ function renderCat(catData) {
   const { name, description, temperament } = catData.breeds[0];
   catInfo.insertAdjacentHTML(
     'beforeend',
-    `<div>
-      <h2>${name}</h2>
-      <img src="${url}" alt="${name}"/>
-      <p>${description}</p>
-      <p>${temperament}</p>
+    `<div class="cat-data">
+      <div class="cat-photo-container">
+        <img class="cat-photo" src="${url}" alt="${name}"/>
+      </div>
+      <div class="cat-description-container">
+        <h2>${name}</h2>
+        <p>${description}</p>
+        <p><strong>Temperament: </strong>${temperament}</p>
+      </div>
     </div>`
   );
   loader.classList.add('hidden');
